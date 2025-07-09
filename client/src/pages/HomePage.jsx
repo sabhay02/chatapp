@@ -8,13 +8,13 @@ const HomePage = () => {
   const { selectedUser } = useContext(ChatContext)
 
   return (
-    <div className='w-full h-screen px-2 py-2 sm:px-4 sm:py-4 lg:px-8 lg:py-6 xl:px-[10%] xl:py-[4%]'>
+    <div className='w-full h-screen px-3 py-3 sm:px-6 sm:py-6 lg:px-12 lg:py-8 xl:px-[8%] xl:py-[3%] page-transition'>
       <div className={`
-        glass-effect rounded-3xl overflow-hidden h-full grid relative
-        shadow-2xl border border-white/20
+        dark-glass rounded-3xl overflow-hidden h-full grid relative
+        shadow-2xl border border-white/10 card-premium
         ${selectedUser 
-          ? 'grid-cols-1 lg:grid-cols-[300px_1fr_320px] xl:grid-cols-[340px_1fr_360px]' 
-          : 'grid-cols-1 lg:grid-cols-[300px_1fr] xl:grid-cols-[340px_1fr]'
+          ? 'grid-cols-1 lg:grid-cols-[320px_1fr_340px] xl:grid-cols-[360px_1fr_380px]' 
+          : 'grid-cols-1 lg:grid-cols-[320px_1fr] xl:grid-cols-[360px_1fr]'
         }
       `}>
         <Sidebar />
@@ -24,7 +24,5 @@ const HomePage = () => {
     </div>
   )
 }
-
-
 
 export default HomePage;
