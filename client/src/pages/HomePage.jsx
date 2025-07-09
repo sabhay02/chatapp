@@ -25,11 +25,6 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
 
-        </div>
-    </div>
-)
-}
 
-export default HomePage
+export default HomePage;
