@@ -4,24 +4,69 @@ import assets, { messagesDummyData } from '../assets/assets';
 import { AuthContext } from '../context/AuthContext';
 import { ChatContext } from '../context/ChatContext';
 import toast from 'react-hot-toast';
+import { useAI } from '../hooks/useAI';
+import SmartReplies from './SmartReplies';
+import SpamWarning from './SpamWarning';
 
 const ChatContianer = () => {
 
   const { messages, selectedUser, setSelectedUser, sendMessage, getMessages } = useContext(ChatContext);
 
 const { authUser, onlineUsers } = useContext(AuthContext);
+const { smartReplies, isLoadingReplies, spamDetection, getSmartReplies, checkSpam, setSmartReplies } = useAI();
 
   const scrollEnd = useRef(null);
 const [input,setInput]=useState('');
+const [showSpamWarning, setShowSpamWarning] = useState(false);
+const [pendingMessage, setPendingMessage] = useState('');
 
 // Handle sending a message
 const handleSendMessage = async (e) => { 
     e.preventDefault(); 
     if (input.trim() === "") return;
-    await sendMessage({ text: input.trim() });
+    
+    const messageText = input.trim();
+    
+    // Check for spam before sending
+    const spamResult = await checkSpam(messageText);
+    if (spamResult.isSpam && spamResult.confidence > 0.7) {
+        setPendingMessage(messageText);
+        setShowSpamWarning(true);
+        return;
+    }
+    
+    await sendMessage({ text: messageText });
     setInput("");
+    setSmartReplies([]);
 };
 
+// Handle sending message anyway despite spam warning
+const handleSendAnyway = async () => {
+    await sendMessage({ text: pendingMessage });
+    setInput("");
+    setPendingMessage("");
+    setShowSpamWarning(false);
+    setSmartReplies([]);
+};
+
+// Handle dismissing spam warning
+const handleDismissSpamWarning = () => {
+    setShowSpamWarning(false);
+    setPendingMessage("");
+};
+
+// Handle selecting a smart reply
+const handleSelectReply = (reply) => {
+    setInput(reply);
+    setSmartReplies([]);
+};
+
+// Handle refreshing smart replies
+const handleRefreshReplies = () => {
+    if (selectedUser) {
+        getSmartReplies(selectedUser._id);
+    }
+};
 // Handle sending an image
 const handleSendImage = async (e) => {
     const file = e.target.files[0];
@@ -43,9 +88,21 @@ const handleSendImage = async (e) => {
 useEffect(()=>{
  if (selectedUser) {
     getMessages(selectedUser._id);
+    // Get smart replies when user is selected
+    getSmartReplies(selectedUser._id);
   }
 },[selectedUser])
 
+// Get smart replies when new messages arrive
+useEffect(() => {
+    if (messages.length > 0 && selectedUser) {
+        // Debounce to avoid too many API calls
+        const timer = setTimeout(() => {
+            getSmartReplies(selectedUser._id);
+        }, 1000);
+        return () => clearTimeout(timer);
+    }
+}, [messages.length]);
 
   useEffect(() => {
     if (scrollEnd.current && messages) {
@@ -163,6 +220,23 @@ useEffect(()=>{
         })}
         <div ref={scrollEnd}></div>
       </div>
+
+      {/* Spam Warning */}
+      {showSpamWarning && (
+        <SpamWarning
+          spamDetection={spamDetection}
+          onDismiss={handleDismissSpamWarning}
+          onSendAnyway={handleSendAnyway}
+        />
+      )}
+
+      {/* Smart Replies */}
+      <SmartReplies
+        suggestions={smartReplies}
+        isLoading={isLoadingReplies}
+        onSelectReply={handleSelectReply}
+        onRefresh={handleRefreshReplies}
+      />
 
       {/* Message input */}
       {/* Message input section - updated */}

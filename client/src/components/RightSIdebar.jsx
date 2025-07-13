@@ -3,11 +3,13 @@ import { userDummyData,imagesDummyData } from '../assets/assets';
 import assets from '../assets/assets';
 import { ChatContext } from '../context/ChatContext';
 import { AuthContext } from '../context/AuthContext';
+import AISettings from './AISettings';
 
 const RightSIdebar = () => {
    const {selectedUser,messages}=useContext(ChatContext);
    const {logout,onlineUsers}=useContext(AuthContext);
    const [msgImages,setMsgImages]=useState([]);
+   const [showAISettings, setShowAISettings] = useState(false);
 
 
    // Get all the images from the messages and set them to state
@@ -109,6 +111,16 @@ useEffect(()=>{
         <div className="space-y-2">
           <h4 className="text-xs lg:text-sm font-medium text-gray-400 uppercase tracking-wider">Settings</h4>
           
+          <button 
+            onClick={() => setShowAISettings(true)}
+            className="w-full flex items-center space-x-3 p-2 lg:p-3 hover:bg-gray-700/30 rounded-lg transition-colors text-left"
+          >
+            <svg className="w-4 h-4 lg:w-5 lg:h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+            <span className="text-xs lg:text-sm text-white">AI Features</span>
+          </button>
+          
           <button className="w-full flex items-center space-x-3 p-2 lg:p-3 hover:bg-gray-700/30 rounded-lg transition-colors text-left">
             <svg className="w-4 h-4 lg:w-5 lg:h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -138,6 +150,11 @@ useEffect(()=>{
           </button>
         </div>
       </div>
+     
+     <AISettings 
+       isOpen={showAISettings} 
+       onClose={() => setShowAISettings(false)} 
+     />
     </div>
   );
 };
