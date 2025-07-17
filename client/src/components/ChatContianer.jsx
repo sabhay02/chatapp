@@ -113,54 +113,54 @@ useEffect(() => {
   return selectedUser ? (
     <div className='h-full flex flex-col bg-gray-900/20 backdrop-blur-sm overflow-hidden'>
       {/* Chat header */}
-      <div className='flex items-center justify-between p-3 lg:p-4 border-b border-gray-600/30 bg-gray-900/40 backdrop-blur-sm flex-shrink-0'>
+      <div className='flex items-center justify-between p-2 sm:p-3 lg:p-4 border-b border-gray-600/30 bg-gray-900/40 backdrop-blur-sm flex-shrink-0'>
         <div className="flex items-center space-x-3">
           <button 
             onClick={() => setSelectedUser(null)} 
-            className='lg:hidden p-2 hover:bg-gray-700/30 rounded-full transition-colors'
+            className='md:hidden p-1 sm:p-2 hover:bg-gray-700/30 rounded-full transition-colors'
           >
-            <ArrowLeft className="w-5 h-5 text-gray-300" />
+            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-300" />
           </button>
           
           <img 
             src={selectedUser.profilePic || assets.avatar_icon} 
             alt={selectedUser.fullName || "User"} 
-            className="w-10 h-10 lg:w-12 lg:h-12 rounded-full object-cover border-2 border-gray-600/50"
+            className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full object-cover border-2 border-gray-600/50"
           />
           
           <div className="flex-1">
-            <h2 className="text-base lg:text-lg font-semibold text-white">
+            <h2 className="text-sm sm:text-base lg:text-lg font-semibold text-white truncate">
               {selectedUser.fullName}
             </h2>
-            {onlineUsers.includes(selectedUser._id) && <p className="text-xs lg:text-sm text-green-400 flex items-center gap-1">
+            {onlineUsers.includes(selectedUser._id) && <p className="text-xs sm:text-sm text-green-400 flex items-center gap-1">
             <span className="w-2 h-2 rounded-full bg-green-500"></span>
               Online
             </p>}
           </div>
         </div>
         
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-1 sm:space-x-2">
           <button className="p-2 hover:bg-gray-700/30 rounded-full transition-colors">
-            <Phone className="w-4 h-4 lg:w-5 lg:h-5 text-gray-300" />
+            <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-gray-300" />
           </button>
           <button className="p-2 hover:bg-gray-700/30 rounded-full transition-colors">
-            <Video className="w-4 h-4 lg:w-5 lg:h-5 text-gray-300" />
+            <Video className="w-4 h-4 sm:w-5 sm:h-5 text-gray-300" />
           </button>
           <button className="p-2 hover:bg-gray-700/30 rounded-full transition-colors">
-            <MoreVertical className="w-4 h-4 lg:w-5 lg:h-5 text-gray-300" />
+            <MoreVertical className="w-4 h-4 sm:w-5 sm:h-5 text-gray-300" />
           </button>
         </div>
       </div>
 
       {/* Chat messages area */}
-      <div className='flex-1 overflow-y-auto p-3 lg:p-4 space-y-4 bg-gradient-to-b from-transparent to-gray-900/10 min-h-0'>
+      <div className='flex-1 overflow-y-auto p-2 sm:p-3 lg:p-4 space-y-3 sm:space-y-4 bg-gradient-to-b from-transparent to-gray-900/10 min-h-0'>
         {messages.map((msg, index) => {
           const isCurrentUser = msg.senderId === authUser._id;
           
           return (
             <div 
               key={index} 
-              className={`flex items-end gap-2 ${isCurrentUser ? 'justify-end' : 'justify-start'}`}
+              className={`flex items-end gap-1 sm:gap-2 ${isCurrentUser ? 'justify-end' : 'justify-start'}`}
             >
               {/* Avatar for received messages */}
               {!isCurrentUser && (
@@ -168,32 +168,32 @@ useEffect(() => {
                  src={msg.senderProfilePic || selectedUser.profilePic || assets.
                     avatar_icon} 
                   alt="User" 
-                  className='w-8 h-8 rounded-full object-cover flex-shrink-0'
+                  className='w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover flex-shrink-0'
                 />
               )}
               
               {/* Message bubble */}
-              <div className={`flex flex-col max-w-xs lg:max-w-md ${isCurrentUser ? 'items-end' : 'items-start'}`}>
+              <div className={`flex flex-col max-w-[70%] sm:max-w-xs lg:max-w-md ${isCurrentUser ? 'items-end' : 'items-start'}`}>
                 {msg.image ? (
                   <div className={`relative group ${isCurrentUser ? 'ml-auto' : 'mr-auto'}`}>
                     <img 
                       src={msg.image} 
                       alt="Message attachment" 
-                      className='max-w-[250px] lg:max-w-[300px] rounded-2xl border border-gray-600/30 shadow-lg'
+                      className='max-w-[200px] sm:max-w-[250px] lg:max-w-[300px] rounded-2xl border border-gray-600/30 shadow-lg'
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 rounded-2xl transition-colors"></div>
                   </div>
                 ) : (
                   <div 
                     className={`
-                      px-4 py-3 rounded-2xl shadow-lg backdrop-blur-sm
+                      px-3 py-2 sm:px-4 sm:py-3 rounded-2xl shadow-lg backdrop-blur-sm
                       ${isCurrentUser 
                         ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-br-md' 
                         : 'bg-gray-800/80 text-white rounded-bl-md border border-gray-600/30'
                       }
                     `}
                   >
-                    <p className="text-sm lg:text-base leading-relaxed break-words">
+                    <p className="text-xs sm:text-sm lg:text-base leading-relaxed break-words">
                       {msg.text}
                     </p>
                   </div>
@@ -212,7 +212,7 @@ useEffect(() => {
                                        src={authUser.profilePic || assets.avatar_icon} 
 
                   alt="You" 
-                  className='w-8 h-8 rounded-full object-cover flex-shrink-0'
+                  className='w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover flex-shrink-0'
                 />
               )}
             </div>
@@ -240,11 +240,11 @@ useEffect(() => {
 
       {/* Message input */}
       {/* Message input section - updated */}
-<div className='p-3 lg:p-4 border-t border-gray-600/30 bg-gray-900/40 backdrop-blur-sm flex-shrink-0'>
-  <div className="flex items-center space-x-3">
+<div className='p-2 sm:p-3 lg:p-4 border-t border-gray-600/30 bg-gray-900/40 backdrop-blur-sm flex-shrink-0'>
+  <div className="flex items-center space-x-2 sm:space-x-3">
     {/* File input with proper label connection */}
     <label htmlFor="image-upload" className="p-2 hover:bg-gray-700/30 rounded-full transition-colors cursor-pointer">
-      <Paperclip className="w-5 h-5 text-gray-300" />
+      <Paperclip className="w-4 h-4 sm:w-5 sm:h-5 text-gray-300" />
     </label>
     <input 
       type="file" 
@@ -263,35 +263,35 @@ useEffect(() => {
         type="text" 
         placeholder="Type a message..."
         className="
-          w-full px-4 py-3 lg:px-5 lg:py-3
+          w-full px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-3
           bg-gray-800/50 border border-gray-600/50
           rounded-full text-white placeholder-gray-400
-          text-sm lg:text-base focus:outline-none focus:border-blue-500
+          text-xs sm:text-sm lg:text-base focus:outline-none focus:border-blue-500
           transition-all duration-200 focus:bg-gray-800/70
         "
       />
     </div>
     
-    <button onClick={handleSendMessage} className="p-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl">
-      <Send className="w-5 h-5 text-white" />
+    <button onClick={handleSendMessage} className="p-2 sm:p-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl">
+      <Send className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
     </button>
   </div>
 </div>
     </div>
   ) : (
-    <div className='h-full flex flex-col items-center justify-center gap-6 text-gray-400 bg-gray-900/10 backdrop-blur-sm p-8'>
-      <div className="w-20 h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-        <span className="text-white font-bold text-2xl lg:text-3xl">C</span>
+    <div className='h-full flex flex-col items-center justify-center gap-4 sm:gap-6 text-gray-400 bg-gray-900/10 backdrop-blur-sm p-4 sm:p-8'>
+      <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+        <span className="text-white font-bold text-xl sm:text-2xl lg:text-3xl">C</span>
       </div>
       <div className="text-center max-w-md">
-        <h3 className="text-xl lg:text-2xl font-semibold text-white mb-2">
+        <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white mb-2">
           Welcome to Chat
         </h3>
-        <p className="text-sm lg:text-base text-gray-400 leading-relaxed">
+        <p className="text-xs sm:text-sm lg:text-base text-gray-400 leading-relaxed px-4">
           Select a conversation from the sidebar to start chatting with your friends and colleagues.
         </p>
       </div>
-      <div className="flex space-x-4 text-xs lg:text-sm text-gray-500">
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500">
         <span>💬 Instant messaging</span>
         <span>📁 File sharing</span>
         <span>🔒 Secure & private</span>

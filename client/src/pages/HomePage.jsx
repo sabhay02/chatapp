@@ -8,11 +8,19 @@ const HomePage = () => {
 const {selectedUser}=useContext(ChatContext)
 
 return (
-    <div className='w-full h-screen px-2 py-2 sm:px-4 sm:py-4 lg:px-8 lg:py-6 xl:px-[10%] xl:py-[4%]'>
-        <div className={`backdrop-blur-xl border-2 border-gray-600 rounded-2xl overflow-hidden h-full grid relative ${selectedUser ? 'grid-cols-1 lg:grid-cols-[280px_1fr_300px] xl:grid-cols-[320px_1fr_350px]' : 'grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[320px_1fr]'}`}>
+    <div className='w-full h-screen p-1 sm:p-2 md:p-4 lg:p-6 xl:px-[8%] xl:py-[3%]'>
+        <div className={`backdrop-blur-xl border border-gray-600 sm:border-2 rounded-lg sm:rounded-2xl overflow-hidden h-full grid relative ${
+            selectedUser 
+                ? 'grid-cols-1 md:grid-cols-[260px_1fr] lg:grid-cols-[280px_1fr_280px] xl:grid-cols-[320px_1fr_350px]' 
+                : 'grid-cols-1 md:grid-cols-[260px_1fr] lg:grid-cols-[280px_1fr] xl:grid-cols-[320px_1fr]'
+        }`}>
             <Sidebar />
             <ChatContianer />
-            {selectedUser && <RightSIdebar />}
+            {selectedUser && (
+                <div className="hidden lg:block">
+                    <RightSIdebar />
+                </div>
+            )}
         </div>
     </div>
 )

@@ -53,22 +53,22 @@ const LoginPage = () => {
 };
 
   return (
-    <div className='min-h-screen bg-cover bg-center flex items-center justify-center gap-8 sm:justify-evenly max-sm:flex-col backdrop-blur-xl'>
+    <div className='min-h-screen bg-cover bg-center flex items-center justify-center gap-4 sm:gap-8 lg:justify-evenly flex-col lg:flex-row backdrop-blur-xl p-4'>
       {/* Left Section */}
       <img 
         src={assets.logo_big} 
         alt="Application Logo" 
-        className='w-[min(30vw,250px)] max-sm:mt-10' 
+        className='w-[min(60vw,200px)] sm:w-[min(40vw,250px)] lg:w-[min(30vw,250px)] mb-4 lg:mb-0' 
       />
 
       {/* Right Section - Form */}
-      <form onSubmit={onSubmitHandler} className='border-2 bg-white/10 text-white border-gray-500 p-6 flex flex-col gap-6 rounded-lg shadow-lg w-[90%] max-w-md'>
-        <h2 className='font-medium text-2xl flex justify-between items-center'>
+      <form onSubmit={onSubmitHandler} className='border border-gray-500 sm:border-2 bg-white/10 text-white p-4 sm:p-6 flex flex-col gap-4 sm:gap-6 rounded-lg shadow-lg w-[95%] sm:w-[90%] max-w-md'>
+        <h2 className='font-medium text-xl sm:text-2xl flex justify-between items-center'>
           {currState}
           <img 
             src={assets.arrow_icon} 
             alt="Toggle" 
-            className='w-5 h-5 cursor-pointer hover:opacity-80 transition-opacity'
+            className='w-4 h-4 sm:w-5 sm:h-5 cursor-pointer hover:opacity-80 transition-opacity'
             onClick={toggleFormState}
           />
         </h2>
@@ -78,7 +78,7 @@ const LoginPage = () => {
             onChange={(e) => setFullName(e.target.value)}
             value={fullName}
             type="text"
-            className="p-2 bg-transparent border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="p-2 sm:p-3 bg-transparent border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
             placeholder="Full Name"
             required
           />
@@ -92,7 +92,7 @@ const LoginPage = () => {
               type="email"
               placeholder="Email Address"
               required
-              className="p-2 bg-transparent border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="p-2 sm:p-3 bg-transparent border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
             />
             <input
               onChange={(e) => setPassword(e.target.value)}
@@ -100,7 +100,7 @@ const LoginPage = () => {
               type="password"
               placeholder="Password"
               required
-              className="p-2 bg-transparent border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="p-2 sm:p-3 bg-transparent border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
             />
           </>
         )}
@@ -109,8 +109,8 @@ const LoginPage = () => {
           <textarea
             onChange={(e) => setBio(e.target.value)}
             value={bio}
-            rows={4}
-            className="p-2 bg-transparent border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            rows={3}
+            className="p-2 sm:p-3 bg-transparent border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base resize-none"
             placeholder="Provide a short bio..."
           ></textarea>
         )}
@@ -131,7 +131,7 @@ const LoginPage = () => {
 
         <button
           type="submit"
-          className="py-3 bg-gradient-to-r from-purple-400 to-violet-600 text-white rounded-md hover:from-purple-500 hover:to-violet-700 transition-colors"
+          className="py-2 sm:py-3 bg-gradient-to-r from-purple-400 to-violet-600 text-white rounded-md hover:from-purple-500 hover:to-violet-700 transition-colors text-sm sm:text-base font-medium"
         >
           {currState === "Sign Up" ? "Create Account" : "Login Now"}
         </button>

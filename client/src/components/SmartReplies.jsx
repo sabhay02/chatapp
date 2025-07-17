@@ -5,11 +5,11 @@ const SmartReplies = ({ suggestions, isLoading, onSelectReply, onRefresh }) => {
   if (!suggestions.length && !isLoading) return null;
 
   return (
-    <div className="p-3 border-t border-gray-600/30 bg-gray-900/20 backdrop-blur-sm">
+    <div className="p-2 sm:p-3 border-t border-gray-600/30 bg-gray-900/20 backdrop-blur-sm">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-purple-400" />
-          <span className="text-xs text-gray-300 font-medium">Smart Replies</span>
+          <span className="text-xs sm:text-sm text-gray-300 font-medium">Smart Replies</span>
         </div>
         <button
           onClick={onRefresh}
@@ -28,7 +28,7 @@ const SmartReplies = ({ suggestions, isLoading, onSelectReply, onRefresh }) => {
       
       <div className="flex flex-wrap gap-2">
         {isLoading ? (
-          <div className="flex items-center gap-2 text-xs text-gray-400">
+          <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-400">
             <Loader2 className="w-3 h-3 animate-spin" />
             Generating suggestions...
           </div>
@@ -38,7 +38,7 @@ const SmartReplies = ({ suggestions, isLoading, onSelectReply, onRefresh }) => {
               key={index}
               onClick={() => onSelectReply(suggestion)}
               className="
-                px-3 py-1.5 text-xs
+                px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm
                 bg-gradient-to-r from-purple-600/20 to-blue-600/20
                 border border-purple-500/30
                 rounded-full text-white
@@ -46,6 +46,7 @@ const SmartReplies = ({ suggestions, isLoading, onSelectReply, onRefresh }) => {
                 hover:border-purple-400/50
                 transition-all duration-200
                 backdrop-blur-sm
+                break-words max-w-full
               "
             >
               {suggestion}

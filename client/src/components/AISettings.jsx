@@ -18,11 +18,11 @@ const AISettings = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-gray-900 border border-gray-600 rounded-lg w-full max-w-md">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 sm:p-4">
+      <div className="bg-gray-900 border border-gray-600 rounded-lg w-[95%] sm:w-full max-w-md max-h-[90vh] overflow-y-auto">
         <div className="p-4 border-b border-gray-600">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+            <h3 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
               <Brain className="w-5 h-5 text-purple-400" />
               AI Features
             </h3>
@@ -37,14 +37,14 @@ const AISettings = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        <div className="p-4 space-y-4">
+        <div className="p-3 sm:p-4 space-y-3 sm:space-y-4">
           {/* Smart Replies */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
               <Sparkles className="w-4 h-4 text-purple-400" />
               <div>
                 <p className="text-sm font-medium text-white">Smart Replies</p>
-                <p className="text-xs text-gray-400">AI-generated response suggestions</p>
+                <p className="text-xs text-gray-400 hidden sm:block">AI-generated response suggestions</p>
               </div>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
@@ -60,11 +60,11 @@ const AISettings = ({ isOpen, onClose }) => {
 
           {/* Spam Detection */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
               <Shield className="w-4 h-4 text-red-400" />
               <div>
                 <p className="text-sm font-medium text-white">Spam Detection</p>
-                <p className="text-xs text-gray-400">Automatically detect spam messages</p>
+                <p className="text-xs text-gray-400 hidden sm:block">Automatically detect spam messages</p>
               </div>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
@@ -80,7 +80,7 @@ const AISettings = ({ isOpen, onClose }) => {
 
           {/* Spam Sensitivity */}
           {settings.spamDetectionEnabled && (
-            <div className="ml-7 space-y-2">
+            <div className="ml-5 sm:ml-7 space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs text-gray-400">Sensitivity</span>
                 <span className="text-xs text-white">{Math.round(settings.spamSensitivity * 100)}%</span>
@@ -99,11 +99,11 @@ const AISettings = ({ isOpen, onClose }) => {
 
           {/* Auto Suggestions */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
               <Settings className="w-4 h-4 text-blue-400" />
               <div>
                 <p className="text-sm font-medium text-white">Auto Suggestions</p>
-                <p className="text-xs text-gray-400">Show suggestions while typing</p>
+                <p className="text-xs text-gray-400 hidden sm:block">Show suggestions while typing</p>
               </div>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
@@ -118,10 +118,10 @@ const AISettings = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        <div className="p-4 border-t border-gray-600">
+        <div className="p-3 sm:p-4 border-t border-gray-600">
           <button
             onClick={onClose}
-            className="w-full py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-200"
+            className="w-full py-2 sm:py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-200 text-sm sm:text-base font-medium"
           >
             Save Settings
           </button>
